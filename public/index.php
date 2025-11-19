@@ -5,6 +5,7 @@ use Slim\Factory\AppFactory;
 
 $app = AppFactory::create();
 
-(require __DIR__ . '/../routes/routes.php')($app);
+// Carrega todas as rotas
+(require __DIR__ . '/../routes/index.php')($app);
 
 $app->run();
