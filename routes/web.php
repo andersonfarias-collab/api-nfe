@@ -1,12 +1,21 @@
 <?php
-
 use Slim\App;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 return function (App $app) {
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('API SlimPHP funcionando!');
-        return $response;
+
+    // Página raiz da API
+    $app->get('/', function ($req, $res) {
+        $res->getBody()->write(json_encode([
+            'status' => 'ok',
+            'message' => 'API-NFe rodando'
+        ]));
+        return $res->withHeader('Content-Type', 'application/json');
     });
+
+    // Healthcheck simples
+    $app->get('/ping', function ($req, $res) {
+        $res->getBody()->write(json_encode(['pong' => true]));
+        return $res->withHeader('Content-Type', 'application/json');
+    });
+
 };
